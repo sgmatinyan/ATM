@@ -5,10 +5,9 @@ import lombok.Getter;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+@Getter
 public class Balance {
-    @Getter
     private BigDecimal amount;
-    @Getter
     private Currency currency;
 
     public Balance (Currency currency) {
