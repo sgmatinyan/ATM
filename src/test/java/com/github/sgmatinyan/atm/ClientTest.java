@@ -12,6 +12,6 @@ class ClientTest {
 
     @Test
     void transferMoney() throws Exception {
-        assertEquals("No enough money",client.transferMoney("+79998764525", BigDecimal.valueOf(1000), new ATM()));
+        assertEquals("Transfer succeed",client.transferMoney("+79998764525", BigDecimal.valueOf(1000), new ATM()));
     }
 }

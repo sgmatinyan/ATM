@@ -11,7 +11,7 @@ public class Balance {
     private Currency currency;
 
     public Balance (Currency currency) {
-        amount = BigDecimal.valueOf(0); // initial amount
+        amount = BigDecimal.valueOf(1000); // initialamount
         this.currency = currency;
     }
 
