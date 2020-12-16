@@ -13,7 +13,7 @@ public class ATM {
         if(!cardFrom.getPIN().equals(PIN)) {
             throw new IncorrectPINException();
         }
-        if (cardFrom.getAccount().getBalance().getAmount().compareTo(sum) < 0) {
+        if (cardFrom.getAccount().getBalance().checkIfHaveEnoughRoubles(amount -> amount.compareTo(sum) >= 0)) {
             throw new NotEnoughMoneyException();
         }
         // *осуществление перевода*
@@ -24,7 +24,7 @@ public class ATM {
         return String.format("Здравствуйте, %s %s!", client.getFirstName(), client.getLastName());
     }
     public String getMoneyTransferOptions() {
-        AtomicReference<String> returnValue = null;
+        AtomicReference<String> returnValue = new AtomicReference<String>();
         returnValue.set("Доступны следующие форматы переводов:\n");
         Arrays.asList(MoneyTransferMethod.values()).forEach(method -> returnValue.set(returnValue.get() + String.format("- %s\n", method.getDescription())));
         return returnValue.get();

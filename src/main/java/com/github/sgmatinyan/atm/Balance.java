@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.function.Predicate;
 
 @Getter
 public class Balance {
@@ -15,7 +16,11 @@ public class Balance {
         this.currency = currency;
     }
 
-    public void changeAmount(BigDecimal sum) {
-        amount = amount.add(sum);
+    public boolean checkIfHaveEnoughRoubles (Predicate<BigDecimal> predicate) {
+        if (currency.getCurrencyCode() == "RUR") {
+            return predicate.test(amount);
+        }
+        return false;
     }
+
 }
