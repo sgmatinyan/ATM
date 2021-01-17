@@ -1,18 +1,22 @@
 package com.github.sgmatinyan.atm;
 
+import com.github.sgmatinyan.atm.account.Account;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Random;
 
-public class Card {
+@Getter
+public class Card <T extends Account> {
+    // некоторая обязательная информация о карте нигде в учебном проекте не используется
     private final static int NUM_OF_YEARS_VALID  = 4;
-    @Getter
     private String number, dueDate, owner, CVV, PIN;
-    @Getter
-    private Account account;
+    private T account;
+    @Setter
+    private boolean isDefault;
 
-    public Card(String firstName, String lastName, Account account) {
+    public Card(String firstName, String lastName, T account) {
         Random random = new Random();
 
         owner = firstName.toUpperCase() + " " + lastName.toUpperCase();

@@ -1,18 +1,16 @@
-package com.github.sgmatinyan.atm;
+package com.github.sgmatinyan.atm.account;
 
+import com.github.sgmatinyan.atm.Balance;
 import lombok.Getter;
 
 import java.util.Currency;
 import java.util.Random;
 
-public class Account {
-    private String num;
-    @Getter
+@Getter
+public abstract class Account {
     private Balance balance;
 
     public Account (Currency currency) {
-        Random random = new Random();
-        num = random.nextInt(999999999) + ""; // simplified
         balance = new Balance(currency);
     }
 }

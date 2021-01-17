@@ -1,18 +1,17 @@
 package com.github.sgmatinyan.atm;
 
+import com.github.sgmatinyan.atm.atm.ATM;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Currency;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClientTest {
-    Client client = new Client("No", "Matter", 3);
-    Account account = new Account(Currency.getInstance("RUR"));
+    Client client = new Client("No", "Matter");
 
     @Test
-    void transferMoney() {
-        assertEquals("No enough money",client.transferMoney(client.getCard(1),account, BigDecimal.valueOf(1000)));
+    void transferMoney() throws Exception {
+        assertEquals("Transfer succeed",client.transferMoney("+79998764525", BigDecimal.valueOf(1000), new ATM()));
     }
 }

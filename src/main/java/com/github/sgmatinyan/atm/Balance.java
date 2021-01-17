@@ -4,19 +4,23 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.function.Predicate;
 
+@Getter
 public class Balance {
-    @Getter
     private BigDecimal amount;
-    @Getter
     private Currency currency;
 
     public Balance (Currency currency) {
-        amount = BigDecimal.valueOf(0); // initial amount
+        amount = BigDecimal.valueOf(1000); // initialamount
         this.currency = currency;
     }
 
-    public void changeAmount(BigDecimal sum) {
-        amount = amount.add(sum);
+    public boolean checkIfHaveEnoughRoubles (Predicate<BigDecimal> predicate) {
+        if (currency.getCurrencyCode() == "RUR") {
+            return predicate.test(amount);
+        }
+        return false;
     }
+
 }
