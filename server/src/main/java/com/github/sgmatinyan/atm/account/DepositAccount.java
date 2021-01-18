@@ -1,6 +1,7 @@
 package com.github.sgmatinyan.atm.account;
 
-import java.util.Currency;
+
+import com.github.sgmatinyan.atm.Currency;
 
 public class DepositAccount extends Account {
     public DepositAccount(Currency currency) {

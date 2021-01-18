@@ -1,10 +1,9 @@
 package com.github.sgmatinyan.atm.account;
 
 import com.github.sgmatinyan.atm.Balance;
+import com.github.sgmatinyan.atm.Currency;
 import lombok.Getter;
 
-import java.util.Currency;
-import java.util.Random;
 
 @Getter
 public abstract class Account {

@@ -14,7 +14,4 @@ public enum MoneyTransferMethod {
         this.description = description;
         this.pattern = pattern;
     }
-    public boolean matchesPattern(String inp) {
-        return inp.matches(pattern);
-    }
 }

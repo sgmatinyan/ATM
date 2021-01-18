@@ -42,4 +42,8 @@ public class Card <T extends Account> {
         result = currentDate.getMonth() + "/" + (currentDate.getYear() + Card.NUM_OF_YEARS_VALID);
         return result;
     }
+
+    public Currency getCurrency() {
+        return account.getBalance().getCurrency();
+    }
 }

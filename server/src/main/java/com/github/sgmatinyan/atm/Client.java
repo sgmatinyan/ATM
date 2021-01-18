@@ -5,12 +5,13 @@ import com.github.sgmatinyan.atm.atm.ATM;
 import com.github.sgmatinyan.atm.atm.IncorrectPINException;
 import com.github.sgmatinyan.atm.atm.NotEnoughMoneyException;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
+@Slf4j
 @Getter
 public class Client {
     private String firstName, lastName;
@@ -19,22 +20,20 @@ public class Client {
     public Client(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        cards.add(new Card<DepositAccount>(firstName,lastName,new DepositAccount(Currency.getInstance("RUR")))); // клиент создается с одной дефолтной рублевой картой
+        cards.add(new Card<DepositAccount>(firstName,lastName,new DepositAccount(Currency.RUR))); // клиент создается с одной дефолтной рублевой картой
         cards.get(0).setDefault(true);
     }
 
-    public String transferMoney(String transferTo, BigDecimal sum, ATM atm) throws NoDefaultCardException, NotEnoughMoneyException {
+    public void transferMoney(String transferTo, BigDecimal sum, ATM atm) throws NoDefaultCardException, NotEnoughMoneyException, IncorrectPINException {
         try {
-            return atm.transferMoney(getDefaultCard(), getDefaultCard().getPIN(), transferTo, sum);
-        } catch (NoDefaultCardException | NotEnoughMoneyException e) {
-            throw e;
+            atm.transferMoney(getDefaultCard(), getDefaultCard().getPIN(), transferTo, sum);
         } catch (IncorrectPINException e) {
-            // todo: Something strange is happening here...
+            log.error("Unexpected IncorrectPINException thrown for client " + firstName + " " + lastName);
+            throw e;
         }
-        return "Error";
     }
 
-    private Card getDefaultCard() throws NoDefaultCardException { // и здесь тоже Card используется без уточнения типа аккаунта (дженерик). Логично же в таких местах так и делать?
+    public Card getDefaultCard() throws NoDefaultCardException { // и здесь тоже Card используется без уточнения типа аккаунта (дженерик). Логично же в таких местах так и делать?
         for (Card card : cards) {
             if (card.isDefault()) {
                 return card;
