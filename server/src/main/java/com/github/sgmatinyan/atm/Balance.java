@@ -16,7 +16,7 @@ public class Balance {
     }
 
     public boolean checkIfHaveEnoughRoubles (Predicate<BigDecimal> predicate) {
-        if (currency.getCode() == com.github.sgmatinyan.atm.Currency.RUR.getCode()) { // только рубль
+        if (currency.getCode() == Currency.RUR.getCode()) { // только рубль
             return predicate.test(amount);
         }
         return false;
