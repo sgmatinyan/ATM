@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ATM {
 
-    public String transferMoney(Card cardFrom, String PIN, String transferTo, BigDecimal sum) throws IncorrectPINException, NotEnoughMoneyException {
+    public void transferMoney(Card cardFrom, String PIN, String transferTo, BigDecimal sum) throws IncorrectPINException, NotEnoughMoneyException {
         if(!cardFrom.getPIN().equals(PIN)) {
             throw new IncorrectPINException();
         }
@@ -17,7 +17,6 @@ public class ATM {
             throw new NotEnoughMoneyException();
         }
         // *осуществление перевода*
-        return "Transfer succeed";
     }
 
     public String getGreeting(Client client) {
@@ -35,14 +34,12 @@ public class ATM {
     }
 
     public boolean isTransferPossible(String transferTo) {
-        Optional<MoneyTransferMethod> transferMethod = Optional.empty();
         for (MoneyTransferMethod method:MoneyTransferMethod.values()) {
-            if (method.matchesPattern(transferTo)) {
-                transferMethod = Optional.of(method);
-                break;
+            if (transferTo.matches(method.getPattern())) {
+                return true;
             }
         }
-        return transferMethod.isPresent();
+        return false;
     }
 
 }

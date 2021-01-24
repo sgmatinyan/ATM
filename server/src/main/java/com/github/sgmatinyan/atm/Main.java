@@ -1,6 +1,7 @@
 package com.github.sgmatinyan.atm;
 
 import com.github.sgmatinyan.atm.atm.ATM;
+import com.github.sgmatinyan.atm.atm.IncorrectPINException;
 import com.github.sgmatinyan.atm.atm.NotEnoughMoneyException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,12 +31,14 @@ public class Main {
         }
 
         try {
-            System.out.println(client.transferMoney(transferTo, BigDecimal.valueOf(1000), atm)); // когда-нибудь клиент сможет сам выбирать сумму для перевода, или MVP в нашем понимании :)
+            client.transferMoney(transferTo, BigDecimal.valueOf(1000), atm); // когда-нибудь клиент сможет сам выбирать сумму для перевода, или MVP в нашем понимании :)
         } catch (NotEnoughMoneyException e) {
             System.out.println("Недостаточно денег не счете");
-            log.error("Something went wrong. Guess what?");
         } catch (NoDefaultCardException e) {
             System.out.println("Не указана стандартная карта карты");
+        } catch (IncorrectPINException e) {
+            System.out.println("Некорректный ПИН");
+            log.error("Некорректный ПИН");
         }
     }
 }
