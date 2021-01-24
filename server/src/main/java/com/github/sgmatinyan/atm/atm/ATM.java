@@ -1,12 +1,14 @@
 package com.github.sgmatinyan.atm.atm;
 
 import com.github.sgmatinyan.atm.*;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
+@Component
 public class ATM {
 
     public void transferMoney(Card cardFrom, String PIN, String transferTo, BigDecimal sum) throws IncorrectPINException, NotEnoughMoneyException {

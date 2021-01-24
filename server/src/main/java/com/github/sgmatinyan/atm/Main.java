@@ -4,6 +4,8 @@ import com.github.sgmatinyan.atm.atm.ATM;
 import com.github.sgmatinyan.atm.atm.IncorrectPINException;
 import com.github.sgmatinyan.atm.atm.NotEnoughMoneyException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -11,12 +13,13 @@ import java.util.Scanner;
 @Slf4j
 public class Main {
     public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.github.sgmatinyan.atm","com.github.sgmatinyan.atm.atm");
+
+        Client client = context.getBean(Client.class);
+        ATM atm = context.getBean(ATM.class);
+
         Scanner scanner = new Scanner(System.in);
         String transferTo;
-
-        Client client = new Client("Alex", "Filin");
-        ATM atm = new ATM();
-
 
         System.out.println(atm.getGreeting(client));
         System.out.println(atm.getMoneyTransferOptions());
