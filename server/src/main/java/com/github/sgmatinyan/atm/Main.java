@@ -16,9 +16,6 @@ public class Main {
         ApplicationContext context = new AnnotationConfigApplicationContext("com.github.sgmatinyan.atm","com.github.sgmatinyan.atm.atm");
 
         Client client = context.getBean(Client.class);
-        client.setFirstName("Alex");
-        client.setLastName("Filin");
-
         ATM atm = context.getBean(ATM.class);
 
         Scanner scanner = new Scanner(System.in);
